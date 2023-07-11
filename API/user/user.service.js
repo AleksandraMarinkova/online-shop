@@ -1,29 +1,45 @@
+
 const User = require("./user.model");
 
 class UserService {
-  // 1. Get all users
-  static async getAllUsers() {
-    const users = await User.find({});
-    return users;
-  }
-
-  // 2. Get user by id
-  static async getUserById(userId) {
-    console.log(userId);
-    const foundUser = await User.findById(userId);
-    console.log(foundUser);
-    return foundUser;
-  }
-  // 3. Create user
-  static async createUser(userData) {
-    const user = new User(userData);
-    // console.log(user);
-    const newUser=await user.save();
-    console.log(newUser);
+  //1.Get  all user
+  static async getAllUser() {
+    const user = await User.find({});
     return user;
   }
-  // 4. Edit user
-  // 5. Delete user
+  //2.Get user by id
+  static async getUserById(userId) {
+    const user = await User.findById(userId);
+    return user;
+  }
+  //3.Create user
+  static async createUser(userData) {
+    console.log("asd");
+    const user = new User(userData);
+    await user.save();
+    return user;
+  }
+  //4.Edit user
+   static async editUser(userId,userData){
+    const user=await User.findById(userId);
+    user.fullName=userData.fullName;
+    user.userName=userData.userName;
+    user.dateOfBirth=userData.dateOfBirth;
+    if(userData.role){
+        throw "Invalid update";
+    }
+    
+    await user.save();
+    return user;
+
+    
+   }
+  //5.Delete user
+  static async deleteUser(userId){
+    const user=await User.findByIdAndDelete();
+
+  }
+
 }
 
 module.exports = UserService;
