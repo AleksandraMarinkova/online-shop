@@ -11,13 +11,6 @@ class UserService {
     const user = await User.findById(userId);
     return user;
   }
-  //3.Create user
-  static async createUser(userData) {
-    console.log("asd");
-    const user = new User(userData);
-    await user.save();
-    return user;
-  }
   //4.Edit user
   static async editUser(userId, userData) {
     const user = await User.findById(userId);

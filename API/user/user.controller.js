@@ -20,18 +20,6 @@ class UserController {
       res.status(400).send(error);
     }
   }
-  //3.Create user
-  //3.Create user
-  static async createUser(req, res) {
-    try {
-      const userData = req.body;
-      const newUser = await UserService.createUser(userData);
-      console.log(newUser);
-      res.status(200).send(newUser);
-    } catch (error) {
-      res.status(400).send(error);
-    }
-  }
   //4.Edit user
   static async editUser(req, res) {
     try {
