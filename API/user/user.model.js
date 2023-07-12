@@ -2,9 +2,6 @@ const mongoose = require("mongoose");
 const { Schema } = require("mongoose");
 
 const userSchema = new Schema({
-  _id: {
-    type: String,
-  },
   fullName: {
     type: String,
     required: [true, "Full name is required"],
@@ -34,6 +31,11 @@ const userSchema = new Schema({
   },
   orders: {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+    default: [],
+  },
+  // tokenRef: { type: String,default:"asd" },
+  tokenRef: {
+    type: [{ type: String }],
     default: [],
   },
 });
