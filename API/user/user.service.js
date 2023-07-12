@@ -1,4 +1,3 @@
-
 const User = require("./user.model");
 
 class UserService {
@@ -20,26 +19,22 @@ class UserService {
     return user;
   }
   //4.Edit user
-   static async editUser(userId,userData){
-    const user=await User.findById(userId);
-    user.fullName=userData.fullName;
-    user.userName=userData.userName;
-    user.dateOfBirth=userData.dateOfBirth;
-    if(userData.role){
-        throw "Invalid update";
+  static async editUser(userId, userData) {
+    const user = await User.findById(userId);
+    user.fullName = userData.fullName;
+    user.userName = userData.userName;
+    user.dateOfBirth = userData.dateOfBirth;
+    if (userData.role) {
+      throw "Invalid update";
     }
-    
+
     await user.save();
     return user;
-
-    
-   }
-  //5.Delete user
-  static async deleteUser(userId){
-    const user=await User.findByIdAndDelete();
-
   }
-
+  //5.Delete user
+  static async deleteUser(userId) {
+    const user = await User.findByIdAndDelete(userId);
+  }
 }
 
 module.exports = UserService;
