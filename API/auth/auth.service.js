@@ -1,12 +1,14 @@
 const User = require("../user/user.model");
+const { Types } = require("mongoose");
 
 class AuthService {
   // 1. Register
   static async registerUser(userData) {
-    console.log("asd");
-    const user = new User(userData);
-    await user.save();
-    return user;
+    const user = new User({ _id: new Types.ObjectId(), ...userData });
+
+    const createdUser = await user.save();
+
+    return createdUser;
   }
   // 2. Login
 }
