@@ -19,7 +19,21 @@ class ProductService {
     return product;
   }
   // 4. Update product
+     static async updateProduct(productId,productData){
+      const product=await Product.findById(productId);
+      product.name=productData.name;
+      product.price=productData.price;
+      product.image=productData.image;
+      product.description=productData.description;
+      product.category=productData.category;
+      await product.save();
+      return product;
+
+     }
   // 5. Delete product
+  static async deleteProduct(productId){
+    const product=await Product.findByIdAndDelete(productId);
+  }
 }
 
 module.exports = ProductService;
