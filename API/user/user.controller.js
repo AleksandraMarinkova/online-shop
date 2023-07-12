@@ -3,11 +3,7 @@ const UserService = require("./user.service");
 class UserController {
   //1.Get  all user
   static async getAllUser(req, res) {
-  //1.Get  all user
-  static async getAllUser(req, res) {
     try {
-      const user = await UserService.getAllUser();
-      res.status(200).send(user);
       const user = await UserService.getAllUser();
       res.status(200).send(user);
     } catch (error) {
@@ -15,12 +11,9 @@ class UserController {
     }
   }
   //2.Get user by id
-  //2.Get user by id
   static async getUserById(req, res) {
     try {
       const userId = req.params.id;
-      const user = await UserService.getUserById(userId);
-      res.status(200).send(user);
       const user = await UserService.getUserById(userId);
       res.status(200).send(user);
     } catch (error) {

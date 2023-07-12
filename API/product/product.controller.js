@@ -14,7 +14,7 @@ class ProductController {
     }
   }
   //2.Get all products
-  static async getAllProduct(req, res) {
+  static async getAllProducts(req, res) {
     try {
       const products = await ProductService.getAllProducts();
       res.status(200).send(products);
@@ -24,41 +24,40 @@ class ProductController {
   }
 
   //3.Get by ID
-  static async getProductById(req,res){
+  static async getProductById(req, res) {
     try {
-        const productId=req.params.id;
-        const product=await ProductService.getProductById(productId);
-        res.status(200).send(product);
-        
+      const productId = req.params.id;
+      const product = await ProductService.getProductById(productId);
+      res.status(200).send(product);
     } catch (error) {
-        res.status(400).send(error);
+      res.status(400).send(error);
     }
   }
 
   //4.Delete Product
-  static async deleteProduct(req,res){
+  static async deleteProduct(req, res) {
     try {
-        const productId=req.params.id;
-        const product=await ProductService.deleteProduct(productId);
-        res.status(200).send(product)
-        
+      const productId = req.params.id;
+      const product = await ProductService.deleteProduct(productId);
+      res.status(200).send(product);
     } catch (error) {
-        res.status(400).send(error);
+      res.status(400).send(error);
     }
   }
 
   //5/Update Product
-  static async updateProduct(req,res){
+  static async updateProduct(req, res) {
     try {
-
-        const productId=req.params.id;
-        const productData=req.body;
-        const product=await ProductService.updateProduct(productId,productData);
-        console.log(product);
-        res.status(200).send(product);
+      const productId = req.params.id;
+      const productData = req.body;
+      const product = await ProductService.updateProduct(
+        productId,
+        productData
+      );
+      console.log(product);
+      res.status(200).send(product);
     } catch (error) {
-        res.status(400).send(error);
-        
+      res.status(400).send(error);
     }
   }
 }
