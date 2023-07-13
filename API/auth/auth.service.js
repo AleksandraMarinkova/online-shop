@@ -11,17 +11,14 @@ class AuthService {
     return createdUser;
   }
   // 2. Login
-  static async loginUser(email, password) {
+  static async LoginUser(email, password) {
+    console.log("email i pass",email,password);
     if (!email) throw "Please enter your email";
     if (!password) throw "Please enter your password";
     const user = await User.findOne({ email });
-
     console.log("Email and password", user);
-
-    const isPasswordValid = await user.comparePasswords(password);
-
+    const isPasswordValid = await user.comparePassword(password);
     if (!isPasswordValid) throw "Invalid password";
-
     if (!user) throw "Invalid credentials";
     return user;
   }
@@ -43,14 +40,21 @@ class AuthService {
     //   console.log("Error from find by id: ",error);
     //   throw error;
     // }
+    //console.log("vnatre vo servis");
+    const foundUser = await User.findById(userId);
+    //console.log("Model user: ", User);
     let lista = [];
     lista.push(refreshToken);
     lista.push("nekoja vrednost");
-    const foundUser = await User.findById(userId);
+
+    //console.log("Found user: ", foundUser);
     // foundUser.tokenRef = refreshToken;
     foundUser.tokenRef = lista;
 
     await foundUser.save();
+    const foundUser1 = await User.findById(userId);
+    //console.log("Vo bazata: ", foundUser1);
+    return foundUser;
   }
 }
 
