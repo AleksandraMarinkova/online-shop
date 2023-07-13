@@ -11,6 +11,20 @@ class AuthService {
     return createdUser;
   }
   // 2. Login
+  static async loginUser(email, password) {
+    if (!email) throw "Please enter your email";
+    if (!password) throw "Please enter your password";
+    const user = await User.findOne({ email });
+
+    console.log("Email and password", user);
+
+    const isPasswordValid = await user.comparePasswords(password);
+
+    if (!isPasswordValid) throw "Invalid password";
+
+    if (!user) throw "Invalid credentials";
+    return user;
+  }
 
   // 3. Save refresh token
   static async saveRefreshToken(userId, refreshToken) {
@@ -29,19 +43,14 @@ class AuthService {
     //   console.log("Error from find by id: ",error);
     //   throw error;
     // }
-    console.log("Model user: ", User);
     let lista = [];
     lista.push(refreshToken);
     lista.push("nekoja vrednost");
     const foundUser = await User.findById(userId);
-    console.log("Found user: ", foundUser);
     // foundUser.tokenRef = refreshToken;
     foundUser.tokenRef = lista;
-    console.log("So fiksen string: ", foundUser);
 
     await foundUser.save();
-    const foundUser1 = await User.findById(userId);
-    console.log("Vo bazata: ", foundUser1);
   }
 }
 
